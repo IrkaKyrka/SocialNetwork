@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyVK
+import SwiftyJSON
 
 class UserInformationViewController: UIViewController {
 
