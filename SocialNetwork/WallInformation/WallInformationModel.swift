@@ -16,6 +16,7 @@ struct WallInfo: Decodable {
     let count: Int?
     let items: [WallItems]
     let profiles: [ProfilesInfo]
+    let groups: [ProfileOfGroups]
 }
 
 struct WallItems: Decodable {
@@ -40,11 +41,18 @@ struct CopyHistory: Decodable {
 struct PostAttachments: Decodable {
     let type: String?
     let photo: PostFoto?
+    let video: PostVideo?
 }
 
 struct PostFoto: Decodable {
     let id: Int?
     let sizes: [SizeOfFoto]?
+}
+
+struct PostVideo: Decodable {
+    let id: Int?
+    let title: String?
+    let photo_320: String?
 }
 
 struct SizeOfFoto: Decodable {
@@ -58,5 +66,11 @@ struct ProfilesInfo: Decodable {
     let id: Int?
     let first_name: String?
     let last_name: String?
+    let photo_100: String?
+}
+
+struct ProfileOfGroups: Decodable {
+    let id: Int?
+    let name: String?
     let photo_100: String?
 }

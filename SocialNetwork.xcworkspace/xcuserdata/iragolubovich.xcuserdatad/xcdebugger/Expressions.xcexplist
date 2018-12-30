@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profilesOfGroup">
+            </PersistentString>
+            <PersistentString
+               value = "histiryOwner">
+            </PersistentString>
+            <PersistentString
+               value = "filterOfGroups">
+            </PersistentString>
+            <PersistentString
+               value = "postOfImage">
+            </PersistentString>
+            <PersistentString
+               value = "profiles">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #7 in WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WallInformationTableViewController.setImage(imageString:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image">
+            </PersistentString>
+            <PersistentString
+               value = "Data(contentsOf: imageUrl)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

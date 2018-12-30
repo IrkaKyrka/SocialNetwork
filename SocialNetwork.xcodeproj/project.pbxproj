@@ -81,10 +81,10 @@
 		2F6F535A21CA5C8700EEAE06 /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				2F6F53C821D62FF600EEAE06 /* WallInformation */,
 				2F6F539C21D3AD4400EEAE06 /* UserInformation */,
-				2F6F539B21D3AC8F00EEAE06 /* DetailsOfGroup */,
+				2F6F53C821D62FF600EEAE06 /* WallInformation */,
 				2F6F539A21D3AC4E00EEAE06 /* ListOfGroups */,
+				2F6F539B21D3AC8F00EEAE06 /* DetailsOfGroup */,
 				2F6F535B21CA5C8700EEAE06 /* AppDelegate.swift */,
 				2F6F535D21CA5C8700EEAE06 /* ViewController.swift */,
 				2F6F535F21CA5C8700EEAE06 /* Main.storyboard */,

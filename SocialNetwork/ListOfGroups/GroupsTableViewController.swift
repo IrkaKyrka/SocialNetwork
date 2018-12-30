@@ -13,7 +13,7 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     final var userId = 0
-    final let token = ""
+    final var token = ""
     private var groups = [Items]()
     private var groupsOfFilter = [Items]()
     
@@ -135,6 +135,7 @@ extension GroupTableViewController{
                 if let indexPath = tableView.indexPathForSelectedRow {
                     if let cell = tableView.cellForRow(at: indexPath) as? GroupTableViewCell {
                         groupInformation.groupId = groups[indexPath.row].id!
+                        groupInformation.token = token
                     }
                 }
             }

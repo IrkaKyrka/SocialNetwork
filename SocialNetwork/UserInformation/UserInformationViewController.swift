@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyVK
-import SwiftyJSON
+
 
 class UserInformationViewController: UIViewController {
 
@@ -91,14 +91,20 @@ class UserInformationViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showListOfGroups" {
+        if segue.identifier == "showListOfGroups"{
             if let groupsList = segue.destination as? GroupTableViewController{
                 guard let id = self.userInformation[0].id else { return }
                 groupsList.userId = id
+                groupsList.token = token
             }
         }
+        if segue.identifier == "showWall"{
+            if let wall = segue.destination as? WallInformationTableViewController{
+                guard let id = self.userInformation[0].id else { return }
+                wall.userId = id
+                wall.token = token
+            }
     }
-    
 }
-
+}
 

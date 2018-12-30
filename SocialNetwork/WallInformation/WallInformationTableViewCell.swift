@@ -17,18 +17,20 @@ class WallInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var historyOwnerName: UILabel!
     @IBOutlet weak var historyOwnerDatePost: UILabel!
     
-    @IBOutlet weak var historyPostText: UITextView!
+    @IBOutlet weak var historyPostText: UILabel!
     @IBOutlet weak var historyPostImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+
     }
     
 }

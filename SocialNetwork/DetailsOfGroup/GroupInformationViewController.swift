@@ -17,7 +17,7 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var descriptionGroup: UITextView!
     
     var groupId = 0
-    final let token = ""
+    final var token = ""
     
     var detailOfGroup = [DetailsOfGroup]()
     
