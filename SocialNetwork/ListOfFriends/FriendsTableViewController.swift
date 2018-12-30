@@ -1,39 +1,39 @@
 //
-//  GroupTableViewController.swift
+//  FriendsTableViewController.swift
 //  SocialNetwork
 //
-//  Created by Ira Golubovich on 12/20/18.
+//  Created by Ira Golubovich on 12/30/18.
 //  Copyright © 2018 Ira Golubovich. All rights reserved.
 //
 
 import UIKit
 
-class GroupTableViewController: UITableViewController, UISearchBarDelegate {
+class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     final var userId = 0
     final var token = ""
-    private var groups = [Items]()
-    private var groupsOfFilter = [Items]()
-    
+    private var friends = [FriendItems]()
+    private var friendsOfFilter = [FriendItems]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGroups()
+
+        getFriends()
         setUpSearchBar()
         alterLayout()
-        
-    }
     
-    private func getGroups(){
+    }
+
+    private func getFriends(){
         
         var urlComponents = URLComponents()
         
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/groups.get"
-        urlComponents.query = "user_id=\(userId)&count=100&extended=true&access_token=\(token)&v=5.92"
+        urlComponents.path = "/method/friends.get"
+        urlComponents.query = "user_id=\(userId)&fields=city,country,photo_100,online&extended=true&access_token=\(token)&v=5.92"
         
         
         guard let url = urlComponents.url else {return}
@@ -47,14 +47,14 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
             
             do{
                 
-                let downloadedGroups = try JSONDecoder().decode(Groups.self, from: data)
-                self.groups = downloadedGroups.response.items
-                self.groupsOfFilter = self.groups
+                let downloadedFriends = try JSONDecoder().decode(Friends.self, from: data)
+                self.friends = downloadedFriends.response.items
+                self.friendsOfFilter = self.friends
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Массив Items = \(self.groups)")
+                print("Массив Items = \(self.friends)")
             }catch let error {
                 print(error)
             }
@@ -62,7 +62,7 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
             }.resume()
         
     }
-
+    
     private func setUpSearchBar(){
         searchBar.delegate = self
         
@@ -77,26 +77,27 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return groupsOfFilter.count
+        return friendsOfFilter.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as? FriendsTableViewCell else { return UITableViewCell()}
         
-        cell.groupName.text = groupsOfFilter[indexPath.row].name
+        cell.friendName.text = "\(friendsOfFilter[indexPath.row].first_name!) \(friendsOfFilter[indexPath.row].last_name!)"
+        cell.friendStatus.text = (friendsOfFilter[indexPath.row].online != nil) ? "Online" : "Offline"
         
         //        cell.contentView.backgroundColor = UIColor.darkGray
         //        cell.backgroundColor = UIColor.lightGray
         
-        if let imageUrl = URL(string: groupsOfFilter[indexPath.row].photo_200!){
+        if let imageUrl = URL(string: friendsOfFilter[indexPath.row].photo_100!){
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageUrl)
                 if let data = data{
                     let image = UIImage(data: data)
                     DispatchQueue.main.async {
-                        cell.groupImage.image = image
-                        cell.groupImage.layer.cornerRadius = cell.groupImage.frame.size.width/2
-                        cell.groupImage.clipsToBounds = true
+                        cell.friendImage.image = image
+                        cell.friendImage.layer.cornerRadius = cell.friendImage.frame.size.width/2
+                        cell.friendImage.clipsToBounds = true
                     }
                 }
             }
@@ -104,43 +105,18 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return searchBar
-//    }
-//
     
-    //searchBar in section header
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-   
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
-            groupsOfFilter = groups
+            friendsOfFilter = friends
             tableView.reloadData()
             return
         }
         
-        groupsOfFilter = groups.filter({ group -> Bool in
-            guard let name = group.name else { return false }
+        friendsOfFilter = friends.filter({ friend -> Bool in
+            guard let name = friend.first_name else { return false }
             return (name.lowercased().contains(searchText.lowercased()))
         })
         tableView.reloadData()
-    }
-}
-
-extension GroupTableViewController{
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDitailsOfGroup" {
-            if let groupInformation = segue.destination as? GroupInformationViewController {
-                if let indexPath = tableView.indexPathForSelectedRow {
-                    if let cell = tableView.cellForRow(at: indexPath) as? GroupTableViewCell {
-                        groupInformation.groupId = groups[indexPath.row].id!
-                        groupInformation.token = token
-                    }
-                }
-            }
-        }
     }
 }

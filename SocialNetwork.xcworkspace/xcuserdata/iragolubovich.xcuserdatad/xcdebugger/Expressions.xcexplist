@@ -20,10 +20,24 @@
             <PersistentString
                value = "profiles">
             </PersistentString>
+            <PersistentString
+               value = "video">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #7 in WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WallInformationTableViewController.playVideoTap(sender:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoURL">
+            </PersistentString>
+            <PersistentString
+               value = "x">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "WallInformationTableViewController.setImage(imageString:):WallInformationTableViewController.swift">

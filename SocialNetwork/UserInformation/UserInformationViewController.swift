@@ -12,10 +12,10 @@ import SwiftyVK
 
 class UserInformationViewController: UIViewController {
 
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var birthdayAndPlace: UILabel!
-    @IBOutlet weak var isOnline: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userBirthdayAndPlace: UILabel!
+    @IBOutlet weak var userStatus: UILabel!
     
     @IBOutlet weak var getListOfGroups: UIButton!
     @IBOutlet weak var getListOfFriends: UIButton!
@@ -57,7 +57,7 @@ class UserInformationViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let jsonFistName = self.userInformation[0].first_name,
                         let jsonLastName = self.userInformation[0].last_name{
-                        self.name.text = "\(jsonFistName) \(jsonLastName)"
+                        self.userName.text = "\(jsonFistName) \(jsonLastName)"
                     }
 //                    let date = Date()
 //                    let formatter = DateFormatter()
@@ -66,8 +66,8 @@ class UserInformationViewController: UIViewController {
                     guard let jsonBirthday = self.userInformation[0].bdate else { return }
                     guard let jsonCountry = self.userInformation[0].country?.title else { return }
                     guard let jsonCity = self.userInformation[0].city?.title else { return }
-                    self.birthdayAndPlace.text = "\(jsonBirthday) \(jsonCountry), \(jsonCity)"
-                    self.isOnline.text = self.userInformation[0].online! == 0 ? "Offline" : "Online"
+                    self.userBirthdayAndPlace.text = "\(jsonBirthday) \(jsonCountry), \(jsonCity)"
+                    self.userStatus.text = self.userInformation[0].online! == 0 ? "Offline" : "Online"
                 }
                 
                 if let imageURL = URL(string: self.userInformation[0].photo_200!){
@@ -76,7 +76,7 @@ class UserInformationViewController: UIViewController {
                         if let data = data {
                             let image = UIImage(data: data)
                             DispatchQueue.main.async {
-                                self.image.image = image
+                                self.userImage.image = image
                             }
                         }
                     }
@@ -104,7 +104,15 @@ class UserInformationViewController: UIViewController {
                 wall.userId = id
                 wall.token = token
             }
+        }
+        
+        if segue.identifier == "showFriends"{
+            if let friend = segue.destination as? FriendsTableViewController{
+                guard let id = self.userInformation[0].id else { return }
+                friend.userId = id
+                friend.token = token
+            }
+        }
     }
-}
 }
 

@@ -1,17 +1,18 @@
 //
-//  GroupTableViewCell.swift
+//  FriendsTableViewCell.swift
 //  SocialNetwork
 //
-//  Created by Ira Golubovich on 12/20/18.
+//  Created by Ira Golubovich on 12/30/18.
 //  Copyright © 2018 Ira Golubovich. All rights reserved.
 //
 
 import UIKit
 
-class GroupTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var groupName: UILabel!
-    @IBOutlet weak var groupImage: UIImageView!
+class FriendsTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var friendImage: UIImageView!
+    @IBOutlet weak var friendName: UILabel!
+    @IBOutlet weak var friendStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +25,4 @@ class GroupTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-  
 }

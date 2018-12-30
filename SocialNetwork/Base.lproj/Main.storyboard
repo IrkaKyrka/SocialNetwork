@@ -73,22 +73,70 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Friends Table View Controller-->
         <scene sceneID="dXI-JP-n4Q">
             <objects>
-                <tableViewController id="hEn-0T-N15" sceneMemberID="viewController">
+                <tableViewController id="hEn-0T-N15" customClass="FriendsTableViewController" customModule="SocialNetwork" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="k9T-Hf-TbK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="FOQ-te-ltb">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="hEn-0T-N15" id="0WK-OH-8sk"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Rbj-Zk-Jsb">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="83" id="Rbj-Zk-Jsb" customClass="FriendsTableViewCell" customModule="SocialNetwork" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="84" width="375" height="83"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rbj-Zk-Jsb" id="caJ-9m-Uqr">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYh-QH-kf6">
+                                            <rect key="frame" x="20" y="15" width="53" height="53"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="53" id="mYA-LG-dVJ"/>
+                                                <constraint firstAttribute="height" constant="53" id="pKQ-4G-9S3"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AAj-hu-fDV">
+                                            <rect key="frame" x="77" y="19" width="266" height="44.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9C-YS-eAX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2d-tC-7R9">
+                                                    <rect key="frame" x="0.0" y="28.5" width="33" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="AAj-hu-fDV" firstAttribute="leading" secondItem="xYh-QH-kf6" secondAttribute="trailing" constant="4" id="1Gd-5e-dY6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="AAj-hu-fDV" secondAttribute="trailing" constant="16" id="79I-IL-ocx"/>
+                                        <constraint firstItem="AAj-hu-fDV" firstAttribute="top" secondItem="caJ-9m-Uqr" secondAttribute="topMargin" constant="8" id="GXe-Ms-z81"/>
+                                        <constraint firstItem="xYh-QH-kf6" firstAttribute="top" secondItem="caJ-9m-Uqr" secondAttribute="topMargin" constant="4" id="Tbt-Li-2GG"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="AAj-hu-fDV" secondAttribute="bottom" constant="8.5" id="Xvo-LT-PgD"/>
+                                        <constraint firstItem="xYh-QH-kf6" firstAttribute="leading" secondItem="caJ-9m-Uqr" secondAttribute="leadingMargin" constant="4" id="Yfq-bm-QXR"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="xYh-QH-kf6" secondAttribute="bottom" constant="4" id="haE-e7-c3Q"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="friendImage" destination="xYh-QH-kf6" id="6DS-yS-ZyM"/>
+                                    <outlet property="friendName" destination="f9C-YS-eAX" id="DxU-ri-N4J"/>
+                                    <outlet property="friendStatus" destination="P2d-tC-7R9" id="fp1-zw-JhG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -96,10 +144,13 @@
                             <outlet property="delegate" destination="hEn-0T-N15" id="X4X-09-NSk"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="FOQ-te-ltb" id="NFY-nc-WvI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMt-B0-Q2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3333" y="-567"/>
+            <point key="canvasLocation" x="3332" y="-567.16641679160421"/>
         </scene>
         <!--Group Table View Controller-->
         <scene sceneID="lLH-FX-OhE">
@@ -156,8 +207,8 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="imageOfGroup" destination="EDp-fU-1JZ" id="a2B-s8-KBJ"/>
-                                    <outlet property="nameOfGroup" destination="qnN-sU-AMw" id="L9e-EH-Ctl"/>
+                                    <outlet property="groupImage" destination="EDp-fU-1JZ" id="a2B-s8-KBJ"/>
+                                    <outlet property="groupName" destination="qnN-sU-AMw" id="L9e-EH-Ctl"/>
                                     <segue destination="W4r-c1-1RC" kind="show" identifier="showDitailsOfGroup" id="Cs5-Me-7wv"/>
                                 </connections>
                             </tableViewCell>
@@ -231,6 +282,9 @@
                                         <rect key="frame" x="0.0" y="44" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Друзья"/>
+                                        <connections>
+                                            <segue destination="hEn-0T-N15" kind="show" identifier="showFriends" id="N3T-1K-9AP"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h65-9m-vRP">
                                         <rect key="frame" x="0.0" y="88" width="343" height="42"/>
@@ -260,12 +314,12 @@
                         <barButtonItem key="backBarButtonItem" title="Назад" id="vuW-k7-Vqt"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="birthdayAndPlace" destination="x1F-r4-hlK" id="4HC-jS-z63"/>
                         <outlet property="getListOfFriends" destination="RcT-wg-IHz" id="dwv-xK-oAW"/>
                         <outlet property="getListOfGroups" destination="y4e-bK-Giu" id="Ana-AU-qea"/>
-                        <outlet property="image" destination="Bh4-oC-RRW" id="5ML-Wm-MPE"/>
-                        <outlet property="isOnline" destination="gyj-Oh-BWv" id="isN-k6-rDr"/>
-                        <outlet property="name" destination="CUx-jw-K5v" id="Tl6-qP-8E3"/>
+                        <outlet property="userBirthdayAndPlace" destination="x1F-r4-hlK" id="4HC-jS-z63"/>
+                        <outlet property="userImage" destination="Bh4-oC-RRW" id="5ML-Wm-MPE"/>
+                        <outlet property="userName" destination="CUx-jw-K5v" id="Tl6-qP-8E3"/>
+                        <outlet property="userStatus" destination="gyj-Oh-BWv" id="isN-k6-rDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqn-7k-c40" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -362,7 +416,7 @@
             </objects>
             <point key="canvasLocation" x="1934" y="109"/>
         </scene>
-        <!--Wall Information Table View Controller-->
+        <!--Title-->
         <scene sceneID="CD0-j0-6RV">
             <objects>
                 <tableViewController id="LRv-KQ-Xnm" customClass="WallInformationTableViewController" customModule="SocialNetwork" customModuleProvider="target" sceneMemberID="viewController">
@@ -407,7 +461,7 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4jO-Wt-G7u">
+                                        <stackView opaque="NO" contentMode="scaleToFill" restorationIdentifier="stackHistoryOwner" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4jO-Wt-G7u">
                                             <rect key="frame" x="61" y="95" width="282" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UFK-BE-MXO">
@@ -486,6 +540,13 @@
                             <outlet property="delegate" destination="LRv-KQ-Xnm" id="ynH-UD-ihU"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="XlJ-NW-fh8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VGg-tx-Sm5">
+                            <connections>
+                                <action selector="openAlert:" destination="LRv-KQ-Xnm" id="Ckj-1F-3DY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dbz-Tv-Qxw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

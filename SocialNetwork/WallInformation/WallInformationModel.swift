@@ -27,6 +27,7 @@ struct WallItems: Decodable {
     let post_type: String?
     let text: String?
     let copy_history: [CopyHistory]?
+    let attachments: [PostAttachments]?
 }
 
 struct CopyHistory: Decodable {
