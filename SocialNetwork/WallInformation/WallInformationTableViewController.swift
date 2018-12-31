@@ -14,8 +14,8 @@ enum Owner {
     case somebody
 }
 
-
 class WallInformationTableViewController: UITableViewController {
+    
     
     final var userId = 0
     final var token = ""
@@ -23,6 +23,12 @@ class WallInformationTableViewController: UITableViewController {
     private var profiles = [ProfilesInfo]()
     private var profilesOfGroup = [ProfileOfGroups]()
     private var nortification: UIAlertController!
+    private let api = APIModel()
+    
+    var wallParams = [
+        "count": "7",
+        "extended": "true"
+    ]
 
     @IBAction func openAlert(_ sender: UIBarButtonItem) {
         
@@ -30,7 +36,15 @@ class WallInformationTableViewController: UITableViewController {
 
         alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            self.addPost(message: textField.text!)
+ //           self.addPost(message: textField.text!)
+            self.api.postData(method: "wall.post", userId: Int(self.wallParams["user_id"]!)!, message: textField.text!, completion: { (error) in
+                if error == nil{
+                    DispatchQueue.main.async {
+                        self.showNotification(message: "Запись добавлена")
+                        self.getWallData()
+                    }
+                }
+            })
         }))
         
         alert.addTextField(configurationHandler: {(textField: UITextField!) in
@@ -42,55 +56,21 @@ class WallInformationTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    override func loadView() {
+        super.loadView()
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+ activityIndicatorView.startAnimating()
+        wallParams["user_id"] = "\(api.userId)"
+        getWallData()
         
-        getInformationWall()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = UITableView.automaticDimension
     }
-    
-    
-    private func getInformationWall(){
-        
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/wall.get"
-        urlComponents.query = "user_id=\(userId)&count=7&extended=true&access_token=\(token)&v=5.92"
-        
-        
-        guard let url = urlComponents.url else {return}
-        print(url)
-        
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
-            do{
-                
-                let downloadedWall = try JSONDecoder().decode(Wall.self, from: data)
-                self.posts = downloadedWall.response.items
-                self.profiles = downloadedWall.response.profiles
-                self.profilesOfGroup = downloadedWall.response.groups
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Массив Items = \(self.posts)")
-                print("Массив profiles = \(self.profiles)")
-            }catch let error {
-                print(error)
-            }
-            
-            
-            }.resume()
-    }
-    // MARK: - Table view data source
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -130,8 +110,7 @@ class WallInformationTableViewController: UITableViewController {
             cell.historyOwnerName.isHidden = true
             cell.historyOwnerImage.isHidden = true
             cell.historyOwnerDatePost.isHidden = true
-            cell.historyOwnerImage.image = UIImage()
-            
+           
             if let postText = post.text{
                 cell.historyPostText.text = postText
             }
@@ -146,9 +125,7 @@ class WallInformationTableViewController: UITableViewController {
                     //let postOfVideo  = getVideo(videoString: (posts[indexPath.row].copy_history?[0].attachments?[0].video?.photo_320)!, size: )
                     DispatchQueue.main.async{
                         cell.historyPostImage.image = postOfVideo
-                        
                     }
-                    
                 }
             } else {
                 cell.historyPostImage.image = UIImage()
@@ -193,35 +170,54 @@ class WallInformationTableViewController: UITableViewController {
                 
                 if let attachments = copyHistory?.attachments{
                     if copyHistory?.attachments?[0].type == "photo"{
-                        let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[2].url)!))
+                        let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[3].url)!))
                         DispatchQueue.main.async{
                             cell.historyPostImage.image = postOfImage
+                            cell.historyPostImage.frame.size.height = CGFloat((attachments[0].photo?.sizes?[3].height)!)
+                            cell.historyPostImage.frame.size.width = CGFloat((attachments[0].photo?.sizes?[3].width)!)
+                            
                         }
                     } else {
                         
                         let postOfVideo = getImage(imageString: (attachments[0].video?.photo_320)!)
                         DispatchQueue.main.async{
                             cell.historyPostImage.image = postOfVideo
+                          
                         }
-                        
-                        
                     }
                 } else {
                     cell.historyPostImage.image = UIImage()
                 }
-                
             }
         }
  
         return cell
     }
-    
-    
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        
-        return UITableView.automaticDimension
+ 
+    private func getWallData(){
+        api.getData(method: "wall.get", params: wallParams) { (data) in
+            do{
+                
+                let downloadedWall = try JSONDecoder().decode(Wall.self, from: data)
+                self.posts = downloadedWall.response.items
+                self.profiles = downloadedWall.response.profiles
+                self.profilesOfGroup = downloadedWall.response.groups
+                sleep(6)
+                DispatchQueue.main.async {
+                    
+                    self.tableView.reloadData()
+                    self.activityIndicatorView.stopAnimating()
+                    
+                }
+                //print("Groups count: \(downloadedGroups.response.items[0].name)")
+                print("Массив Items = \(self.posts)")
+                print("Массив profiles = \(self.profiles)")
+                
+            }catch let error {
+                
+                print(error)
+            }
+        }
     }
     
     private func dateFormatting(dateJson: Int) -> String{
@@ -243,35 +239,7 @@ class WallInformationTableViewController: UITableViewController {
         }
         return image
     }
-    
-    private func addPost(message: String){
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/wall.post"
-        urlComponents.query = "owner_id=\(userId)&message=\(message)&access_token=\(token)&v=5.92"
-        
-        
-        guard let url = urlComponents.url else {return}
-        print(url)
-        
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            print(data)
-            print(response)
-            print(error)
-            if error == nil{
-                DispatchQueue.main.async {
-                    self.showNotification(message: "Запись добавлена")
-                    self.getInformationWall()
-                }
-            }
-           
-            }.resume()
-    }
-    
+  
     private func showNotification(message: String){
         self.nortification = UIAlertController(title: "Уведомление", message: message, preferredStyle: UIAlertController.Style.alert)
         self.present(self.nortification, animated: true, completion: nil)
@@ -316,6 +284,20 @@ class WallInformationTableViewController: UITableViewController {
 //        }
 //    }
     
+    lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        activityIndicatorView.hidesWhenStopped = true
+        
+        // Set Center
+        var center = self.view.center
+        if let navigationBarFrame = self.navigationController?.navigationBar.frame {
+            center.y -= (navigationBarFrame.origin.y + navigationBarFrame.size.height)
+        }
+        activityIndicatorView.center = center
+        
+        self.view.addSubview(activityIndicatorView)
+        return activityIndicatorView
+    }()
 }
 
 

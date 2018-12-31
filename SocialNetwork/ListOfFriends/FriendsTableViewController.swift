@@ -11,40 +11,25 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    final var userId = 0
-    final var token = ""
+
     private var friends = [FriendItems]()
     private var friendsOfFilter = [FriendItems]()
+    
+    var friendsParams = [
+        "fields": "city,country,photo_100,online",
+        "extended": "true"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getFriends()
+
         setUpSearchBar()
         alterLayout()
-    
-    }
-
-    private func getFriends(){
         
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/friends.get"
-        urlComponents.query = "user_id=\(userId)&fields=city,country,photo_100,online&extended=true&access_token=\(token)&v=5.92"
-        
-        
-        guard let url = urlComponents.url else {return}
-        print(url)
-        
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
+        let api = APIModel()
+        friendsParams["user_id"] = "\(api.userId)"
+        api.getData(method: "friends.get", params: friendsParams) { (data) in
             do{
                 
                 let downloadedFriends = try JSONDecoder().decode(Friends.self, from: data)
@@ -58,9 +43,8 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
             }catch let error {
                 print(error)
             }
-            
-            }.resume()
-        
+        }
+    
     }
     
     private func setUpSearchBar(){

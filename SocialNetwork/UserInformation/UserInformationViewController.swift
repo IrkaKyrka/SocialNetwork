@@ -20,36 +20,19 @@ class UserInformationViewController: UIViewController {
     @IBOutlet weak var getListOfGroups: UIButton!
     @IBOutlet weak var getListOfFriends: UIButton!
     
-    var userId = 0
-    final let token = ""
+    var userParams = [
+        "fields": "sex,bdate,city,country,place,photo_200,online",
+        "extended": "true"
+    ]
     
     var userInformation = [DetailsOfUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         getInformationUser()
-       
-    }
-    
-    private func getInformationUser() {
-        
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/users.get"
-        urlComponents.query = "user_ids=\(userId)&fields=sex,bdate,city,country,place,photo_200,online&extended=true&access_token=\(token)&v=5.92"
-        
-        guard let url = urlComponents.url else { return }
-        
-        print(url)
-        
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
+
+        let api: APIModel = APIModel()
+        userParams["user_id"] = "\(api.userId)"
+        api.getData(method: "users.get", params: userParams) { (data) in
             do{
                 let downloadedInformationOfUser = try JSONDecoder().decode(UserInformation.self, from: data)
                 self.userInformation = downloadedInformationOfUser.response
@@ -59,10 +42,10 @@ class UserInformationViewController: UIViewController {
                         let jsonLastName = self.userInformation[0].last_name{
                         self.userName.text = "\(jsonFistName) \(jsonLastName)"
                     }
-//                    let date = Date()
-//                    let formatter = DateFormatter()
-//                    formatter.dateFormat = "dd.m.yyyy"
-//                    let resultDate = formatter.String(from: date)
+                    //                    let date = Date()
+                    //                    let formatter = DateFormatter()
+                    //                    formatter.dateFormat = "dd.m.yyyy"
+                    //                    let resultDate = formatter.String(from: date)
                     guard let jsonBirthday = self.userInformation[0].bdate else { return }
                     guard let jsonCountry = self.userInformation[0].country?.title else { return }
                     guard let jsonCity = self.userInformation[0].city?.title else { return }
@@ -84,35 +67,10 @@ class UserInformationViewController: UIViewController {
                 
             }catch let error {
                 print(error)
+            }
         }
-        }.resume()
-        
-
+       
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showListOfGroups"{
-            if let groupsList = segue.destination as? GroupTableViewController{
-                guard let id = self.userInformation[0].id else { return }
-                groupsList.userId = id
-                groupsList.token = token
-            }
-        }
-        if segue.identifier == "showWall"{
-            if let wall = segue.destination as? WallInformationTableViewController{
-                guard let id = self.userInformation[0].id else { return }
-                wall.userId = id
-                wall.token = token
-            }
-        }
-        
-        if segue.identifier == "showFriends"{
-            if let friend = segue.destination as? FriendsTableViewController{
-                guard let id = self.userInformation[0].id else { return }
-                friend.userId = id
-                friend.token = token
-            }
-        }
-    }
 }
 

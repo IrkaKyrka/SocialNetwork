@@ -12,39 +12,23 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    final var userId = 0
-    final var token = ""
     private var groups = [Items]()
     private var groupsOfFilter = [Items]()
     
+    var groupsParam = [
+        "user_ids": "21212138",
+        "extended": "true"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGroups()
+
         setUpSearchBar()
         alterLayout()
         
-    }
-    
-    private func getGroups(){
-        
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/groups.get"
-        urlComponents.query = "user_id=\(userId)&count=100&extended=true&access_token=\(token)&v=5.92"
-        
-        
-        guard let url = urlComponents.url else {return}
-        print(url)
-        
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
+        let api = APIModel()
+        groupsParam["user_ids"] = "\(api.userId)"
+        api.getData(method: "groups.get", params: groupsParam) { (data) in
             do{
                 
                 let downloadedGroups = try JSONDecoder().decode(Groups.self, from: data)
@@ -58,8 +42,7 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
             }catch let error {
                 print(error)
             }
-            
-            }.resume()
+        }
         
     }
 
@@ -104,16 +87,6 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return searchBar
-//    }
-//
-    
-    //searchBar in section header
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-   
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             groupsOfFilter = groups
@@ -136,11 +109,10 @@ extension GroupTableViewController{
             if let groupInformation = segue.destination as? GroupInformationViewController {
                 if let indexPath = tableView.indexPathForSelectedRow {
                     if let cell = tableView.cellForRow(at: indexPath) as? GroupTableViewCell {
-                        groupInformation.groupId = groups[indexPath.row].id!
-                        groupInformation.token = token
+                        groupInformation.groupParams["group_ids"] = "\(groups[indexPath.row].id!)"
                     }
                 }
-            }
+            } 
         }
     }
 }

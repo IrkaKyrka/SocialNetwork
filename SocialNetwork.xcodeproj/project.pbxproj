@@ -25,6 +25,7 @@
 		2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590C21D9132200018E58 /* FriendsModel.swift */; };
 		2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */; };
 		2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */; };
+		2FD8591521DA109200018E58 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591421DA109200018E58 /* APIModel.swift */; };
 		F0B5370A931DB2973B0FA7E8 /* Pods_SocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E60BD1167586CF86C36EF98 /* Pods_SocialNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		2FD8590C21D9132200018E58 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		2FD8591421DA109200018E58 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		4E60BD1167586CF86C36EF98 /* Pods_SocialNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7869EA4A92C95AC87FB0C6DF /* Pods-SocialNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialNetwork/Pods-SocialNetwork.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7DB1D6F0EE797FDF280524 /* Pods-SocialNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialNetwork/Pods-SocialNetwork.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		2F6F535A21CA5C8700EEAE06 /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				2FD8591421DA109200018E58 /* APIModel.swift */,
 				2FD8590B21D9130000018E58 /* ListOfFriends */,
 				2F6F539C21D3AD4400EEAE06 /* UserInformation */,
 				2F6F53C821D62FF600EEAE06 /* WallInformation */,
@@ -293,6 +296,7 @@
 				2F6F539521D23D9D00EEAE06 /* GroupInformationModel.swift in Sources */,
 				2F6F535E21CA5C8700EEAE06 /* ViewController.swift in Sources */,
 				2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */,
+				2FD8591521DA109200018E58 /* APIModel.swift in Sources */,
 				2F6F539E21D3AD8A00EEAE06 /* UserInformationModel.swift in Sources */,
 				2F6F53CE21D6309300EEAE06 /* WallInformationTableViewController.swift in Sources */,
 				2F6F539121CBC15900EEAE06 /* GroupsTableViewController.swift in Sources */,
