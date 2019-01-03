@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol GroupInformationViewControllerDelegate {
+    func fillFavouriteGroup(name: String)
+}
+
 class GroupInformationViewController: UIViewController {
     
     @IBOutlet weak var image: UIImageView!
@@ -16,12 +20,19 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var country: UILabel!
     @IBOutlet weak var descriptionGroup: UITextView!
     
-    var groupDetail = [DetailsOfGroup]()
+    private var nortification: UIAlertController!
+    var delegate: GroupInformationViewControllerDelegate?
+    private var groupDetail = [DetailsOfGroup]()
     
     var groupParams = [
         "fields": "city,country,place,members_count,description",
         "extended": "true"
     ]
+    @IBAction func addFavouriteGroup(_ sender: UIBarButtonItem) {
+        let groupName = name.text
+        delegate?.fillFavouriteGroup(name: groupName!)
+        self.showNotification(message: "Группа добавлена в избранные")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +65,21 @@ class GroupInformationViewController: UIViewController {
                             }
                         }
                     }
-                }
-                //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Детали Группы = \(self.groupDetail)")
-                
+                }    
             }catch let error {
                 
                 print(error)
             }
         }
+    }
+    
+    private func showNotification(message: String){
+        self.nortification = UIAlertController(title: "Уведомление", message: message, preferredStyle: UIAlertController.Style.alert)
+        self.present(self.nortification, animated: true, completion: nil)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.dismissNotification), userInfo: nil, repeats: false)
+    }
+    
+    @objc private func dismissNotification(){
+        self.nortification.dismiss(animated: true, completion: nil)
     }
 }

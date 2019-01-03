@@ -237,7 +237,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-oC-RRW">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-oC-RRW">
                                 <rect key="frame" x="77.5" y="80" width="220" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="MwI-Ea-dhf"/>
@@ -245,7 +245,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Dcr-LS-RYI">
-                                <rect key="frame" x="16" y="316" width="343" height="83.5"/>
+                                <rect key="frame" x="16" y="316" width="343" height="144.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUx-jw-K5v">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -265,31 +265,43 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmN-e7-l5q">
+                                        <rect key="frame" x="0.0" y="94.5" width="343" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="U81-OL-QrT">
-                                <rect key="frame" x="16" y="415.5" width="343" height="130"/>
+                                <rect key="frame" x="16" y="476.5" width="343" height="130"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-bK-Giu">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-bK-Giu" customClass="PushButton" customModule="SocialNetwork" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Группы"/>
+                                        <state key="normal" title="Группы">
+                                            <color key="titleColor" red="0.92279213666915894" green="0.95593255758285522" blue="0.83594411611557007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <segue destination="i6d-zL-ekT" kind="show" identifier="showListOfGroups" id="v2E-gr-znV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcT-wg-IHz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcT-wg-IHz" customClass="PushButton" customModule="SocialNetwork" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Друзья"/>
+                                        <state key="normal" title="Друзья">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <segue destination="hEn-0T-N15" kind="show" identifier="showFriends" id="N3T-1K-9AP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h65-9m-vRP">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h65-9m-vRP" customClass="PushButton" customModule="SocialNetwork" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Стена"/>
+                                        <state key="normal" title="Стена">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <segue destination="LRv-KQ-Xnm" kind="show" identifier="showWall" id="pOy-OR-YhB"/>
                                         </connections>
@@ -314,8 +326,7 @@
                         <barButtonItem key="backBarButtonItem" title="Назад" id="vuW-k7-Vqt"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="getListOfFriends" destination="RcT-wg-IHz" id="dwv-xK-oAW"/>
-                        <outlet property="getListOfGroups" destination="y4e-bK-Giu" id="Ana-AU-qea"/>
+                        <outlet property="favouriteGroup" destination="XmN-e7-l5q" id="cbG-Xe-czc"/>
                         <outlet property="userBirthdayAndPlace" destination="x1F-r4-hlK" id="4HC-jS-z63"/>
                         <outlet property="userImage" destination="Bh4-oC-RRW" id="5ML-Wm-MPE"/>
                         <outlet property="userName" destination="CUx-jw-K5v" id="Tl6-qP-8E3"/>
@@ -386,6 +397,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ob7-qR-fn9"/>
                     </view>
+                    <navigationItem key="navigationItem" id="QI9-Re-1Ha">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xrn-Sk-lYM">
+                            <connections>
+                                <action selector="addFavouriteGroup:" destination="W4r-c1-1RC" id="rRL-Gi-N6j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="country" destination="8sp-MR-6Rz" id="weU-KN-ZeM"/>
                         <outlet property="descriptionGroup" destination="JV7-bQ-Vsy" id="etd-cD-P45"/>
@@ -416,7 +434,7 @@
             </objects>
             <point key="canvasLocation" x="1934" y="109"/>
         </scene>
-        <!--Title-->
+        <!--Wall Information Table View Controller-->
         <scene sceneID="CD0-j0-6RV">
             <objects>
                 <tableViewController id="LRv-KQ-Xnm" customClass="WallInformationTableViewController" customModule="SocialNetwork" customModuleProvider="target" sceneMemberID="viewController">
@@ -540,7 +558,7 @@
                             <outlet property="delegate" destination="LRv-KQ-Xnm" id="ynH-UD-ihU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="XlJ-NW-fh8">
+                    <navigationItem key="navigationItem" id="XlJ-NW-fh8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VGg-tx-Sm5">
                             <connections>
                                 <action selector="openAlert:" destination="LRv-KQ-Xnm" id="Ckj-1F-3DY"/>

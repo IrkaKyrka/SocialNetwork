@@ -29,6 +29,20 @@ class WallInformationTableViewController: UITableViewController {
         "count": "7",
         "extended": "true"
     ]
+    
+    lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        activityIndicatorView.hidesWhenStopped = true
+     
+        var center = self.view.center
+        if let navigationBarFrame = self.navigationController?.navigationBar.frame {
+            center.y -= (navigationBarFrame.origin.y + navigationBarFrame.size.height)
+        }
+        activityIndicatorView.center = center
+        
+        self.view.addSubview(activityIndicatorView)
+        return activityIndicatorView
+    }()
 
     @IBAction func openAlert(_ sender: UIBarButtonItem) {
         
@@ -36,7 +50,6 @@ class WallInformationTableViewController: UITableViewController {
 
         alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
- //           self.addPost(message: textField.text!)
             self.api.postData(method: "wall.post", userId: Int(self.wallParams["user_id"]!)!, message: textField.text!, completion: { (error) in
                 if error == nil{
                     DispatchQueue.main.async {
@@ -56,20 +69,18 @@ class WallInformationTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
- activityIndicatorView.startAnimating()
+        activityIndicatorView.startAnimating()
         wallParams["user_id"] = "\(api.userId)"
         getWallData()
+    }
+    
+  
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
         
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,7 +100,6 @@ class WallInformationTableViewController: UITableViewController {
         let post = self.posts[indexPath.row]
         
         if let ownerId = post.owner_id{
-            print("Owner \(ownerId)")
             let profile = profiles.filter { $0.id == ownerId}[0]
             if let name = profile.first_name, let lastName = profile.last_name{
                 cell.ownerName.text = "\(name) \(lastName)"
@@ -116,7 +126,7 @@ class WallInformationTableViewController: UITableViewController {
             }
             if let attachments = post.attachments{
                 if post.attachments?[0].type == "photo"{
-                    let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[2].url)!))
+                    let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[3].url)!))
                     DispatchQueue.main.async{
                         cell.historyPostImage.image = postOfImage
                     }
@@ -143,7 +153,6 @@ class WallInformationTableViewController: UITableViewController {
             cell.historyOwnerDatePost.text = historyDatePost
             
             if let historyOwner = copyHistory?.owner_id{
-                print("Owner \(historyOwner)")
                 if historyOwner > 0 {
                     let profile = profiles.filter { $0.id == historyOwner}[0]
                     if let name = profile.first_name, let lastName = profile.last_name{
@@ -173,9 +182,6 @@ class WallInformationTableViewController: UITableViewController {
                         let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[3].url)!))
                         DispatchQueue.main.async{
                             cell.historyPostImage.image = postOfImage
-                            cell.historyPostImage.frame.size.height = CGFloat((attachments[0].photo?.sizes?[3].height)!)
-                            cell.historyPostImage.frame.size.width = CGFloat((attachments[0].photo?.sizes?[3].width)!)
-                            
                         }
                     } else {
                         
@@ -190,7 +196,6 @@ class WallInformationTableViewController: UITableViewController {
                 }
             }
         }
- 
         return cell
     }
  
@@ -202,16 +207,11 @@ class WallInformationTableViewController: UITableViewController {
                 self.posts = downloadedWall.response.items
                 self.profiles = downloadedWall.response.profiles
                 self.profilesOfGroup = downloadedWall.response.groups
-                sleep(6)
+                
                 DispatchQueue.main.async {
-                    
                     self.tableView.reloadData()
                     self.activityIndicatorView.stopAnimating()
-                    
                 }
-                //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Массив Items = \(self.posts)")
-                print("Массив profiles = \(self.profiles)")
                 
             }catch let error {
                 
@@ -284,20 +284,7 @@ class WallInformationTableViewController: UITableViewController {
 //        }
 //    }
     
-    lazy var activityIndicatorView: UIActivityIndicatorView = {
-        let activityIndicatorView = UIActivityIndicatorView(style: .gray)
-        activityIndicatorView.hidesWhenStopped = true
-        
-        // Set Center
-        var center = self.view.center
-        if let navigationBarFrame = self.navigationController?.navigationBar.frame {
-            center.y -= (navigationBarFrame.origin.y + navigationBarFrame.size.height)
-        }
-        activityIndicatorView.center = center
-        
-        self.view.addSubview(activityIndicatorView)
-        return activityIndicatorView
-    }()
+    
 }
 
 

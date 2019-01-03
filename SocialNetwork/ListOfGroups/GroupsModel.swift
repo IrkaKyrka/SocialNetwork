@@ -15,8 +15,7 @@ struct Groups: Decodable {
 
 struct GroupsInfo: Decodable {
     let count: Int?
-    let items: Array<Items>
-    
+    let items: [Items]
 }
 
 struct Items: Decodable {

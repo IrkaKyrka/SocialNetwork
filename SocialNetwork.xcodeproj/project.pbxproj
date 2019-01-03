@@ -22,6 +22,7 @@
 		2F6F53CA21D6303000EEAE06 /* WallInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53C921D6303000EEAE06 /* WallInformationModel.swift */; };
 		2F6F53CC21D6305E00EEAE06 /* WallInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53CB21D6305E00EEAE06 /* WallInformationTableViewCell.swift */; };
 		2F6F53CE21D6309300EEAE06 /* WallInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */; };
+		2F764DB421DE48F30089CF71 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DB321DE48F30089CF71 /* PushButton.swift */; };
 		2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590C21D9132200018E58 /* FriendsModel.swift */; };
 		2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */; };
 		2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */; };
@@ -47,6 +48,7 @@
 		2F6F53C921D6303000EEAE06 /* WallInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationModel.swift; sourceTree = "<group>"; };
 		2F6F53CB21D6305E00EEAE06 /* WallInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationTableViewCell.swift; sourceTree = "<group>"; };
 		2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationTableViewController.swift; sourceTree = "<group>"; };
+		2F764DB321DE48F30089CF71 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
 		2FD8590C21D9132200018E58 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				2F6F539D21D3AD8A00EEAE06 /* UserInformationModel.swift */,
 				2F6F539F21D3AEEC00EEAE06 /* UserInformationViewController.swift */,
+				2F764DB321DE48F30089CF71 /* PushButton.swift */,
 			);
 			path = UserInformation;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SocialNetwork/Pods-SocialNetwork-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyVK/SwiftyVK.framework",
 			);
@@ -277,6 +281,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyVK.framework",
 			);
@@ -302,6 +307,7 @@
 				2F6F539121CBC15900EEAE06 /* GroupsTableViewController.swift in Sources */,
 				2F6F535C21CA5C8700EEAE06 /* AppDelegate.swift in Sources */,
 				2F6F538F21CBBD1600EEAE06 /* GroupsModel.swift in Sources */,
+				2F764DB421DE48F30089CF71 /* PushButton.swift in Sources */,
 				2F6F53A021D3AEEC00EEAE06 /* UserInformationViewController.swift in Sources */,
 				2F6F53CA21D6303000EEAE06 /* WallInformationModel.swift in Sources */,
 				2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */,

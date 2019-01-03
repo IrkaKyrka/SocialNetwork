@@ -7,6 +7,7 @@ target 'SocialNetwork' do
 
 pod 'SwiftyVK'
 pod 'SwiftyJSON', '~> 4.0'
+pod 'SQLite.swift', '~> 0.11.5'
 
   # Pods for SocialNetwork
 

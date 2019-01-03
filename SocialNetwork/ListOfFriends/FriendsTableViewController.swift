@@ -38,8 +38,6 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Массив Items = \(self.friends)")
             }catch let error {
                 print(error)
             }
@@ -69,10 +67,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
         
         cell.friendName.text = "\(friendsOfFilter[indexPath.row].first_name!) \(friendsOfFilter[indexPath.row].last_name!)"
         cell.friendStatus.text = (friendsOfFilter[indexPath.row].online != nil) ? "Online" : "Offline"
-        
-        //        cell.contentView.backgroundColor = UIColor.darkGray
-        //        cell.backgroundColor = UIColor.lightGray
-        
+
         if let imageUrl = URL(string: friendsOfFilter[indexPath.row].photo_100!){
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageUrl)

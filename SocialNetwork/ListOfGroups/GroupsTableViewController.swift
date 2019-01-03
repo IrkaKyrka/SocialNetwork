@@ -15,6 +15,8 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     private var groups = [Items]()
     private var groupsOfFilter = [Items]()
     
+    var delegate: GroupInformationViewControllerDelegate?
+    
     var groupsParam = [
         "user_ids": "21212138",
         "extended": "true"
@@ -37,8 +39,6 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                //print("Groups count: \(downloadedGroups.response.items[0].name)")
-                print("Массив Items = \(self.groups)")
             }catch let error {
                 print(error)
             }
@@ -48,7 +48,6 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
 
     private func setUpSearchBar(){
         searchBar.delegate = self
-        
     }
     
     private func alterLayout(){
@@ -59,7 +58,6 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return groupsOfFilter.count
     }
     
@@ -67,9 +65,6 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupTableViewCell else { return UITableViewCell()}
         
         cell.groupName.text = groupsOfFilter[indexPath.row].name
-        
-        //        cell.contentView.backgroundColor = UIColor.darkGray
-        //        cell.backgroundColor = UIColor.lightGray
         
         if let imageUrl = URL(string: groupsOfFilter[indexPath.row].photo_200!){
             DispatchQueue.global().async {
@@ -110,6 +105,7 @@ extension GroupTableViewController{
                 if let indexPath = tableView.indexPathForSelectedRow {
                     if let cell = tableView.cellForRow(at: indexPath) as? GroupTableViewCell {
                         groupInformation.groupParams["group_ids"] = "\(groups[indexPath.row].id!)"
+                        groupInformation.delegate = self.delegate
                     }
                 }
             } 

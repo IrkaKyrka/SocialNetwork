@@ -11,10 +11,11 @@ import Foundation
 
 class APIModel {
     
-    let userId = 0
-    let token = ""
-   
-     func getData(method: String, params: [String:String], completion: @escaping (_ data: Data) -> Void) {
+    let userId = 21212138
+    let token = "b9c6fa75a14285bc2bbba05299b75ac763dbf1c1fdf6955c64f99f7c8df63f4e44dbe0a8847ba1371dc5e"
+    
+    
+    func getData(method: String, params: [String:String], completion: @escaping (_ data: Data) -> Void) {
         
         var urlComponents = URLComponents()
         var query = ""
@@ -30,18 +31,14 @@ class APIModel {
         
         guard let url = urlComponents.url else { return }
         
-        print(url)
-        
         let request = URLRequest(url: url)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             
             guard let data = data else { return }
-         
-                completion(data)
+            
+            completion(data)
             }.resume()
-        
-        
     }
     
     func postData(method: String, userId: Int, message: String, completion: @escaping (_ error: Error?) -> Void) {
@@ -51,10 +48,8 @@ class APIModel {
         urlComponents.host = "api.vk.com"
         urlComponents.path = "/method/wall.post"
         urlComponents.query = "owner_id=\(userId)&message=\(message)&access_token=\(token)&v=5.92"
-        
-        
+       
         guard let url = urlComponents.url else {return}
-        print(url)
         
         let request = URLRequest(url: url)
         let session = URLSession.shared
@@ -64,10 +59,4 @@ class APIModel {
             
             }.resume()
     }
-    
-    
-}
-
-private func addPost(message: String){
-    
 }
