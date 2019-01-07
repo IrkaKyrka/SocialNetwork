@@ -18,7 +18,7 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var memberCount: UILabel!
     @IBOutlet weak var country: UILabel!
-    @IBOutlet weak var descriptionGroup: UITextView!
+    @IBOutlet weak var descriptionGroup: UILabel!
     
     private var nortification: UIAlertController!
     var delegate: GroupInformationViewControllerDelegate?
@@ -53,6 +53,7 @@ class GroupInformationViewController: UIViewController {
                     self.name.text = self.groupDetail[0].name
                     self.memberCount.text = "Участников \(String(self.groupDetail[0].members_count!))"
                     self.descriptionGroup.text = self.groupDetail[0].description
+                    self.descriptionGroup.sizeToFit()
                 }
                 
                 if let imageUrl = URL(string: self.groupDetail[0].photo_200!) {

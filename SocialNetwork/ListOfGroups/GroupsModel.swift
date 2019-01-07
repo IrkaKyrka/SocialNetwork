@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ira Golubovich. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct Groups: Decodable {
     let response: GroupsInfo

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2F6F535C21CA5C8700EEAE06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F535B21CA5C8700EEAE06 /* AppDelegate.swift */; };
-		2F6F535E21CA5C8700EEAE06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F535D21CA5C8700EEAE06 /* ViewController.swift */; };
 		2F6F536121CA5C8700EEAE06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F535F21CA5C8700EEAE06 /* Main.storyboard */; };
 		2F6F536321CA5C8A00EEAE06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F536221CA5C8A00EEAE06 /* Assets.xcassets */; };
 		2F6F536621CA5C8A00EEAE06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F536421CA5C8A00EEAE06 /* LaunchScreen.storyboard */; };
@@ -23,6 +22,7 @@
 		2F6F53CC21D6305E00EEAE06 /* WallInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53CB21D6305E00EEAE06 /* WallInformationTableViewCell.swift */; };
 		2F6F53CE21D6309300EEAE06 /* WallInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */; };
 		2F764DB421DE48F30089CF71 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DB321DE48F30089CF71 /* PushButton.swift */; };
+		2F764DB621E3B58C0089CF71 /* VCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DB521E3B58C0089CF71 /* VCLogger.swift */; };
 		2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590C21D9132200018E58 /* FriendsModel.swift */; };
 		2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */; };
 		2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */; };
@@ -33,7 +33,6 @@
 /* Begin PBXFileReference section */
 		2F6F535821CA5C8700EEAE06 /* SocialNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6F535B21CA5C8700EEAE06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F6F535D21CA5C8700EEAE06 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2F6F536021CA5C8700EEAE06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F6F536221CA5C8A00EEAE06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F6F536521CA5C8A00EEAE06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		2F6F53CB21D6305E00EEAE06 /* WallInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationTableViewCell.swift; sourceTree = "<group>"; };
 		2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationTableViewController.swift; sourceTree = "<group>"; };
 		2F764DB321DE48F30089CF71 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
+		2F764DB521E3B58C0089CF71 /* VCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLogger.swift; sourceTree = "<group>"; };
 		2FD8590C21D9132200018E58 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -91,15 +91,14 @@
 		2F6F535A21CA5C8700EEAE06 /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				2FD8591421DA109200018E58 /* APIModel.swift */,
+				2F764DB721E3CA120089CF71 /* Helpers */,
 				2FD8590B21D9130000018E58 /* ListOfFriends */,
 				2F6F539C21D3AD4400EEAE06 /* UserInformation */,
 				2F6F53C821D62FF600EEAE06 /* WallInformation */,
 				2F6F539A21D3AC4E00EEAE06 /* ListOfGroups */,
 				2F6F539B21D3AC8F00EEAE06 /* DetailsOfGroup */,
-				2F6F535B21CA5C8700EEAE06 /* AppDelegate.swift */,
-				2F6F535D21CA5C8700EEAE06 /* ViewController.swift */,
 				2F6F535F21CA5C8700EEAE06 /* Main.storyboard */,
+				2F6F535B21CA5C8700EEAE06 /* AppDelegate.swift */,
 				2F6F536221CA5C8A00EEAE06 /* Assets.xcassets */,
 				2F6F536421CA5C8A00EEAE06 /* LaunchScreen.storyboard */,
 				2F6F536721CA5C8A00EEAE06 /* Info.plist */,
@@ -131,7 +130,6 @@
 			children = (
 				2F6F539D21D3AD8A00EEAE06 /* UserInformationModel.swift */,
 				2F6F539F21D3AEEC00EEAE06 /* UserInformationViewController.swift */,
-				2F764DB321DE48F30089CF71 /* PushButton.swift */,
 			);
 			path = UserInformation;
 			sourceTree = "<group>";
@@ -144,6 +142,16 @@
 				2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */,
 			);
 			path = WallInformation;
+			sourceTree = "<group>";
+		};
+		2F764DB721E3CA120089CF71 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2F764DB521E3B58C0089CF71 /* VCLogger.swift */,
+				2F764DB321DE48F30089CF71 /* PushButton.swift */,
+				2FD8591421DA109200018E58 /* APIModel.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2FD8590B21D9130000018E58 /* ListOfFriends */ = {
@@ -299,7 +307,7 @@
 			files = (
 				2F6F539721D24CDF00EEAE06 /* GroupInformationViewController.swift in Sources */,
 				2F6F539521D23D9D00EEAE06 /* GroupInformationModel.swift in Sources */,
-				2F6F535E21CA5C8700EEAE06 /* ViewController.swift in Sources */,
+				2F764DB621E3B58C0089CF71 /* VCLogger.swift in Sources */,
 				2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */,
 				2FD8591521DA109200018E58 /* APIModel.swift in Sources */,
 				2F6F539E21D3AD8A00EEAE06 /* UserInformationModel.swift in Sources */,

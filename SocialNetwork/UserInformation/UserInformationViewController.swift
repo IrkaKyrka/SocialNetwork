@@ -17,6 +17,9 @@ class UserInformationViewController: UIViewController {
     @IBOutlet weak var userBirthdayAndPlace: UILabel!
     @IBOutlet weak var userStatus: UILabel!
     @IBOutlet weak var favouriteGroup: UILabel!
+    @IBOutlet weak var groupsButton: PushButton!
+    @IBOutlet weak var friendsButton: PushButton!
+    @IBOutlet weak var wallButton: PushButton!
     
     var userParams = [
         "fields": "sex,bdate,city,country,place,photo_200,online",
@@ -74,6 +77,14 @@ class UserInformationViewController: UIViewController {
        
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.groupsButton.setNeedsDisplay()
+        self.friendsButton.setNeedsDisplay()
+        self.wallButton.setNeedsDisplay()
+    
+    }
+  
     func addGesture(image: UIImageView!){
         
         image.isUserInteractionEnabled = true

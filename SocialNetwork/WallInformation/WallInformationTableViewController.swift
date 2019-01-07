@@ -14,7 +14,7 @@ enum Owner {
     case somebody
 }
 
-class WallInformationTableViewController: UITableViewController {
+class WallInformationTableViewController: VCLogger {
     
     
     final var userId = 0
@@ -71,18 +71,24 @@ class WallInformationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicatorView.startAnimating()
         wallParams["user_id"] = "\(api.userId)"
         getWallData()
     }
     
-  
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        activityIndicatorView.startAnimating()
+        self.tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
+       
         self.tableView.reloadData()
         
     }
     
+ 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return posts.count
@@ -211,6 +217,7 @@ class WallInformationTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.activityIndicatorView.stopAnimating()
+                    
                 }
                 
             }catch let error {

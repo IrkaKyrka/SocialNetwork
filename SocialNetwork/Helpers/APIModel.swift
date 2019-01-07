@@ -12,7 +12,7 @@ import Foundation
 class APIModel {
     
     let userId = 21212138
-    let token = "b9c6fa75a14285bc2bbba05299b75ac763dbf1c1fdf6955c64f99f7c8df63f4e44dbe0a8847ba1371dc5e"
+    let token = "1eb743b150754e265b05543cc0f4160b7ff8c300c105556a0c1d861460ccd8ebec684eedf4dfd54b4b7e2"
     
     
     func getData(method: String, params: [String:String], completion: @escaping (_ data: Data) -> Void) {
