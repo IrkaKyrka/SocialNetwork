@@ -35,9 +35,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
                 let downloadedFriends = try JSONDecoder().decode(Friends.self, from: data)
                 self.friends = downloadedFriends.response.items
                 self.friendsOfFilter = self.friends
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
             }catch let error {
                 print(error)
             }

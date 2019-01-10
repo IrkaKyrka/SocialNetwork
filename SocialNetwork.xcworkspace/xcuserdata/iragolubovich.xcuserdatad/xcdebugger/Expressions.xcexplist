@@ -3,30 +3,28 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+         contextName = "WallInformationTableViewController.tableView(_:numberOfRowsInSection:):WallInformationTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profilesOfGroup">
-            </PersistentString>
-            <PersistentString
-               value = "histiryOwner">
-            </PersistentString>
-            <PersistentString
-               value = "filterOfGroups">
-            </PersistentString>
-            <PersistentString
-               value = "postOfImage">
-            </PersistentString>
-            <PersistentString
-               value = "profiles">
-            </PersistentString>
-            <PersistentString
-               value = "video">
+               value = "wallPostViewModelController.viewModelsCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #7 in WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+         contextName = "WallInformationTableViewController.init(coder:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageLoadOperations">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WallInformationTableViewController.imageLoadOperations.getter:WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageLoadOperations">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "WallInformationTableViewController.playVideoTap(sender:):WallInformationTableViewController.swift">
@@ -38,6 +36,58 @@
                value = "x">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageLoadOperation">
+            </PersistentString>
+            <PersistentString
+               value = "filterOfGroups">
+            </PersistentString>
+            <PersistentString
+               value = "profiles">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath">
+            </PersistentString>
+            <PersistentString
+               value = "strongSelf">
+            </PersistentString>
+            <PersistentString
+               value = "image">
+            </PersistentString>
+            <PersistentString
+               value = "histiryOwner">
+            </PersistentString>
+            <PersistentString
+               value = "postOfImage">
+            </PersistentString>
+            <PersistentString
+               value = "video">
+            </PersistentString>
+            <PersistentString
+               value = "profilesOfGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WallPostViewModelController.viewModelsCount.getter:WallPostViewModelController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in WallInformationTableViewController.getWallData():WallInformationTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #7 in WallInformationTableViewController.tableView(_:cellForRowAt:):WallInformationTableViewController.swift">
       </ContextState>
       <ContextState
          contextName = "WallInformationTableViewController.setImage(imageString:):WallInformationTableViewController.swift">

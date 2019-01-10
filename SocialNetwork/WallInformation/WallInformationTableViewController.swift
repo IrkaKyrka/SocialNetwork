@@ -14,7 +14,9 @@ enum Owner {
     case somebody
 }
 
-class WallInformationTableViewController: VCLogger {
+var imageCache = [String: UIImage]()
+
+class WallInformationTableViewController: UITableViewController {
     
     
     final var userId = 0
@@ -24,6 +26,11 @@ class WallInformationTableViewController: VCLogger {
     private var profilesOfGroup = [ProfileOfGroups]()
     private var nortification: UIAlertController!
     private let api = APIModel()
+    
+    
+    let wallPostViewModelController = WallPostViewModelController()
+    let wallOwnerViewModelController = WallOwnerViewModelController()
+    let wallGroupViewModelController = WallGroupViewModelController()
     
     var wallParams = [
         "count": "7",
@@ -78,130 +85,126 @@ class WallInformationTableViewController: VCLogger {
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
         activityIndicatorView.startAnimating()
-        self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-       
         self.tableView.reloadData()
-        
+
     }
-    
+
  
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return posts.count
+        return wallPostViewModelController.viewModelsCount
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "wallCell", for: indexPath) as? WallInformationTableViewCell else { return UITableViewCell() }
         
-        var postOwner = Owner.myself
-        if let copyHistory = self.posts[indexPath.row].copy_history {
-            postOwner = Owner.somebody
+        
+        cell.historyPostImage.image = nil
+        cell.historyOwnerDatePost.text = nil
+        cell.historyOwnerImage.image = nil
+        cell.historyPostText.text = nil
+        cell.historyOwnerName.text = nil
+        
+        let post = self.wallPostViewModelController.viewModel(at: indexPath.row)
+        
+        
+        let ownerId = post?.ownerId
+        let profile = self.wallOwnerViewModelController.wallOwnerViewModels.filter { $0!.ownerId == ownerId}[0]
+        if let name = profile?.ownerName{
+            cell.ownerName.text = name
         }
-        
-        let post = self.posts[indexPath.row]
-        
-        if let ownerId = post.owner_id{
-            let profile = profiles.filter { $0.id == ownerId}[0]
-            if let name = profile.first_name, let lastName = profile.last_name{
-                cell.ownerName.text = "\(name) \(lastName)"
-            }
-            if let imageOwner = profile.photo_100{
+        if let imageOwner = profile!.ownerImage{
+            if let cachedImage = imageCache[imageOwner]{
+                cell.ownerImage.image = cachedImage
+            }else{
                 let image = getImage(imageString: imageOwner)
+                imageCache[imageOwner] = image
                 DispatchQueue.main.async {
                     cell.ownerImage.image = image
                 }
             }
         }
+
+        if let postText = post?.postText{
+            cell.historyPostText.text = postText
+        }
         
-        let date = dateFormatting(dateJson: post.date!)
+        let date = dateFormatting(dateJson: (post?.ownerDatePost)!)
         cell.ownerDatePost.text = date
         
-        switch postOwner {
-        case .myself:
-            cell.historyOwnerName.isHidden = true
-            cell.historyOwnerImage.isHidden = true
-            cell.historyOwnerDatePost.isHidden = true
-           
-            if let postText = post.text{
-                cell.historyPostText.text = postText
-            }
-            if let attachments = post.attachments{
-                if post.attachments?[0].type == "photo"{
-                    let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[3].url)!))
-                    DispatchQueue.main.async{
-                        cell.historyPostImage.image = postOfImage
-                    }
-                } else {
-                    let postOfVideo = getImage(imageString: (attachments[0].video?.photo_320)!)
-                    //let postOfVideo  = getVideo(videoString: (posts[indexPath.row].copy_history?[0].attachments?[0].video?.photo_320)!, size: )
-                    DispatchQueue.main.async{
-                        cell.historyPostImage.image = postOfVideo
-                    }
-                }
-            } else {
-                cell.historyPostImage.image = UIImage()
-            }
-        case .somebody:
-            cell.historyOwnerName.isHidden = false
-            cell.historyOwnerImage.isHidden = false
-            cell.historyOwnerDatePost.isHidden = false
-
-            let copyHistory = post.copy_history?[0]
-            if let postText = copyHistory?.text{
-                cell.historyPostText.text = postText
-            }
-            let historyDatePost = dateFormatting(dateJson: ((copyHistory?.date!)!))
+        if let dataPost = post?.historyOwnerDatePost{
+            let historyDatePost = dateFormatting(dateJson: dataPost)
             cell.historyOwnerDatePost.text = historyDatePost
-            
-            if let historyOwner = copyHistory?.owner_id{
-                if historyOwner > 0 {
-                    let profile = profiles.filter { $0.id == historyOwner}[0]
-                    if let name = profile.first_name, let lastName = profile.last_name{
-                        cell.historyOwnerName.text = "\(name) \(lastName)"
-                    }
-                    if let imageHistoryOwner = profile.photo_100{
-                        let image = getImage(imageString: imageHistoryOwner)
-                        DispatchQueue.main.async {
-                            cell.historyOwnerImage.image = image
-                        }
-                    }
+        }
+        
+        if post?.attachmentType == "photo"{
+            if let image = post?.postImage{
+                if let cachedImage = imageCache[image]{
+                     cell.historyPostImage.image = cachedImage
                 } else {
-                    let group = profilesOfGroup.filter { $0.id == abs(historyOwner)}[0]
-                    if let name = group.name {
-                        cell.historyOwnerName.text = name
-                    }
-                    if let imageHistoryOwner = group.photo_100{
-                        let image = getImage(imageString: imageHistoryOwner)
-                        DispatchQueue.main.async {
-                            cell.historyOwnerImage.image = image
-                        }
+                    let postImage = getImage(imageString: image)
+                    imageCache[image] = postImage
+                    DispatchQueue.main.async{
+                        cell.historyPostImage.image = postImage
                     }
                 }
-                
-                if let attachments = copyHistory?.attachments{
-                    if copyHistory?.attachments?[0].type == "photo"{
-                        let postOfImage = getImage(imageString: ((attachments[0].photo?.sizes?[3].url)!))
-                        DispatchQueue.main.async{
-                            cell.historyPostImage.image = postOfImage
-                        }
-                    } else {
-                        
-                        let postOfVideo = getImage(imageString: (attachments[0].video?.photo_320)!)
-                        DispatchQueue.main.async{
-                            cell.historyPostImage.image = postOfVideo
-                          
-                        }
-                    }
+            }
+           
+        } else {
+            if let imageVideo = post?.postVideoImage{
+                if let cachedImage = imageCache[imageVideo]{
+                    cell.historyPostImage.image = cachedImage
                 } else {
-                    cell.historyPostImage.image = UIImage()
+                    let postImage = getImage(imageString: imageVideo)
+                    imageCache[imageVideo] = postImage
+                    DispatchQueue.main.async{
+                        cell.historyPostImage.image = postImage
+                    }
                 }
             }
         }
+        addGesture(image: cell.historyPostImage, video: "")
+
+        if let historyId = post?.historyOwnerId{
+            if historyId > 0{
+                let profile = self.wallOwnerViewModelController.wallOwnerViewModels.filter { $0!.ownerId == historyId}[0]
+                if let name = profile?.ownerName{
+                    cell.historyOwnerName.text = name
+                }
+                if let imageOwner = profile!.ownerImage{
+                    if let cachedImage = imageCache[imageOwner]{
+                        cell.historyOwnerImage.image = cachedImage
+                    } else{
+                        let image = getImage(imageString: imageOwner)
+                        imageCache[imageOwner] = image
+                        DispatchQueue.main.async {
+                            cell.historyOwnerImage.image = image
+                        }
+                    }
+                }
+            } else {
+                let profile = self.wallGroupViewModelController.wallGroupViewModels.filter { $0!.groupId == abs(historyId)}[0]
+                if let name = profile?.groupName{
+                    cell.historyOwnerName.text = name
+                }
+                if let imageOwner = profile!.groupImage{
+                    if let cachedImage = imageCache[imageOwner]{
+                        cell.historyOwnerImage.image = cachedImage
+                    } else{
+                        let image = getImage(imageString: imageOwner)
+                        imageCache[imageOwner] = image
+                        DispatchQueue.main.async {
+                            cell.historyOwnerImage.image = image
+                        }
+                    }
+                }
+            }
+        }
+        
         return cell
     }
  
@@ -210,9 +213,9 @@ class WallInformationTableViewController: VCLogger {
             do{
                 
                 let downloadedWall = try JSONDecoder().decode(Wall.self, from: data)
-                self.posts = downloadedWall.response.items
-                self.profiles = downloadedWall.response.profiles
-                self.profilesOfGroup = downloadedWall.response.groups
+                self.wallPostViewModelController.initViewModels(downloadedWall.response.items)
+                self.wallOwnerViewModelController.initViewModels(downloadedWall.response.profiles)
+                self.wallGroupViewModelController.initViewModels(downloadedWall.response.groups)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -257,39 +260,38 @@ class WallInformationTableViewController: VCLogger {
         self.nortification.dismiss(animated: true, completion: nil)
     }
     
-//    private func getVideo(videoString: String, size: CGRect) -> AVPlayer{
-//        //        let player = AVPlayer(url: URL(string: videoString)!)
-//        //        let playerLayer = AVPlayerLayer(player: player)
-//        //        playerLayer.frame = self.view.bounds
-//        //        self.view.layer.addSublayer(playerLayer)
-//        let playerItem = AVPlayerItem(url: URL(string: videoString)!)
-//        let player = AVPlayer(playerItem: playerItem)
-//        let playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.frame = size
-//        //      self.view.layer.addSublayer(playerLayer)
-//        return player
-//    }
+    private func getVideo(videoString: String, size: CGRect) -> AVPlayer{
+        //        let player = AVPlayer(url: URL(string: videoString)!)
+        //        let playerLayer = AVPlayerLayer(player: player)
+        //        playerLayer.frame = self.view.bounds
+        //        self.view.layer.addSublayer(playerLayer)
+        let playerItem = AVPlayerItem(url: URL(string: videoString)!)
+        let player = AVPlayer(playerItem: playerItem)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = size
+        //      self.view.layer.addSublayer(playerLayer)
+        return player
+    }
     
-//    private func addGesture(image: UIImageView?, video: String?){
-//        if let image = image{
-//        image.isUserInteractionEnabled = true
-//        let tapGestreRecognizer = UITapGestureRecognizer(target: self, action: #selector(playVideoTap))
-//        image.addGestureRecognizer(tapGestreRecognizer)
-//        }
-//    }
-//
-//    @objc func playVideoTap(sender: UITapGestureRecognizer){
-//        let x = self.posts[0].copy_history?[0].attachments?[0].video?.photo_320
-//            if let videoURL = self.posts[0].copy_history?[0].attachments?[0].video?.photo_320{
-//                print(videoURL)
-//                let video = AVPlayer(url: URL(fileURLWithPath: videoURL))
-//                let videoPlayer = AVPlayerViewController()
-//                videoPlayer.player = video
-//                present(videoPlayer, animated: true,completion: {
-//                    video.play()
-//                })
-//        }
-//    }
+    private func addGesture(image: UIImageView, video: String?){
+
+        image.isUserInteractionEnabled = true
+        let tapGestreRecognizer = UITapGestureRecognizer(target: self, action: #selector(playVideoTap))
+        image.addGestureRecognizer(tapGestreRecognizer)
+        
+    }
+
+    @objc func playVideoTap(sender: UITapGestureRecognizer){
+            let videoURL = "https://cs632401.vkuservideo.net/7/u214268/videos/ff8e69e759.240.mp4"
+                print(videoURL)
+                let video = AVPlayer(url: URL(fileURLWithPath: videoURL))
+                let videoPlayer = AVPlayerViewController()
+                videoPlayer.player = video
+                present(videoPlayer, animated: true,completion: {
+                    video.play()
+                })
+        
+    }
     
     
 }

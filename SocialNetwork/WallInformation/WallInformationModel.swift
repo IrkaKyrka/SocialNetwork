@@ -67,11 +67,11 @@ struct ProfilesInfo: Decodable {
     let id: Int?
     let first_name: String?
     let last_name: String?
-    let photo_100: String?
+    let photo_50: String?
 }
 
 struct ProfileOfGroups: Decodable {
     let id: Int?
     let name: String?
-    let photo_100: String?
+    let photo_50: String?
 }

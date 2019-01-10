@@ -23,6 +23,15 @@
 		2F6F53CE21D6309300EEAE06 /* WallInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */; };
 		2F764DB421DE48F30089CF71 /* PushButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DB321DE48F30089CF71 /* PushButton.swift */; };
 		2F764DB621E3B58C0089CF71 /* VCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DB521E3B58C0089CF71 /* VCLogger.swift */; };
+		2F764DBB21E532700089CF71 /* WallPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DBA21E532700089CF71 /* WallPostViewModel.swift */; };
+		2F764DBD21E532A90089CF71 /* WallPostViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DBC21E532A90089CF71 /* WallPostViewModelController.swift */; };
+		2F764DBF21E538FA0089CF71 /* WallOwnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DBE21E538FA0089CF71 /* WallOwnerViewModel.swift */; };
+		2F764DC121E539340089CF71 /* WallOwnerViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC021E539340089CF71 /* WallOwnerViewModelController.swift */; };
+		2F764DC321E54BF20089CF71 /* WallGroupViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC221E54BF20089CF71 /* WallGroupViewModelController.swift */; };
+		2F764DC521E54D670089CF71 /* WallGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC421E54D670089CF71 /* WallGroupViewModel.swift */; };
+		2F764DC721E5E24F0089CF71 /* UIImageExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC621E5E24F0089CF71 /* UIImageExtention.swift */; };
+		2F764DC921E621C90089CF71 /* ImageLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC821E621C90089CF71 /* ImageLoadOperation.swift */; };
+		2F764DCB21E7A8B00089CF71 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DCA21E7A8AF0089CF71 /* ImageService.swift */; };
 		2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590C21D9132200018E58 /* FriendsModel.swift */; };
 		2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */; };
 		2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */; };
@@ -49,6 +58,15 @@
 		2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallInformationTableViewController.swift; sourceTree = "<group>"; };
 		2F764DB321DE48F30089CF71 /* PushButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButton.swift; sourceTree = "<group>"; };
 		2F764DB521E3B58C0089CF71 /* VCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLogger.swift; sourceTree = "<group>"; };
+		2F764DBA21E532700089CF71 /* WallPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPostViewModel.swift; sourceTree = "<group>"; };
+		2F764DBC21E532A90089CF71 /* WallPostViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPostViewModelController.swift; sourceTree = "<group>"; };
+		2F764DBE21E538FA0089CF71 /* WallOwnerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallOwnerViewModel.swift; sourceTree = "<group>"; };
+		2F764DC021E539340089CF71 /* WallOwnerViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallOwnerViewModelController.swift; sourceTree = "<group>"; };
+		2F764DC221E54BF20089CF71 /* WallGroupViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallGroupViewModelController.swift; sourceTree = "<group>"; };
+		2F764DC421E54D670089CF71 /* WallGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallGroupViewModel.swift; sourceTree = "<group>"; };
+		2F764DC621E5E24F0089CF71 /* UIImageExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtention.swift; sourceTree = "<group>"; };
+		2F764DC821E621C90089CF71 /* ImageLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadOperation.swift; sourceTree = "<group>"; };
+		2F764DCA21E7A8AF0089CF71 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		2FD8590C21D9132200018E58 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,9 +155,15 @@
 		2F6F53C821D62FF600EEAE06 /* WallInformation */ = {
 			isa = PBXGroup;
 			children = (
+				2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */,
 				2F6F53C921D6303000EEAE06 /* WallInformationModel.swift */,
 				2F6F53CB21D6305E00EEAE06 /* WallInformationTableViewCell.swift */,
-				2F6F53CD21D6309300EEAE06 /* WallInformationTableViewController.swift */,
+				2F764DBA21E532700089CF71 /* WallPostViewModel.swift */,
+				2F764DBE21E538FA0089CF71 /* WallOwnerViewModel.swift */,
+				2F764DC421E54D670089CF71 /* WallGroupViewModel.swift */,
+				2F764DBC21E532A90089CF71 /* WallPostViewModelController.swift */,
+				2F764DC021E539340089CF71 /* WallOwnerViewModelController.swift */,
+				2F764DC221E54BF20089CF71 /* WallGroupViewModelController.swift */,
 			);
 			path = WallInformation;
 			sourceTree = "<group>";
@@ -150,6 +174,9 @@
 				2F764DB521E3B58C0089CF71 /* VCLogger.swift */,
 				2F764DB321DE48F30089CF71 /* PushButton.swift */,
 				2FD8591421DA109200018E58 /* APIModel.swift */,
+				2F764DC621E5E24F0089CF71 /* UIImageExtention.swift */,
+				2F764DC821E621C90089CF71 /* ImageLoadOperation.swift */,
+				2F764DCA21E7A8AF0089CF71 /* ImageService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -307,17 +334,26 @@
 			files = (
 				2F6F539721D24CDF00EEAE06 /* GroupInformationViewController.swift in Sources */,
 				2F6F539521D23D9D00EEAE06 /* GroupInformationModel.swift in Sources */,
+				2F764DBF21E538FA0089CF71 /* WallOwnerViewModel.swift in Sources */,
 				2F764DB621E3B58C0089CF71 /* VCLogger.swift in Sources */,
+				2F764DC921E621C90089CF71 /* ImageLoadOperation.swift in Sources */,
+				2F764DC721E5E24F0089CF71 /* UIImageExtention.swift in Sources */,
+				2F764DC121E539340089CF71 /* WallOwnerViewModelController.swift in Sources */,
+				2F764DC521E54D670089CF71 /* WallGroupViewModel.swift in Sources */,
 				2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */,
+				2F764DC321E54BF20089CF71 /* WallGroupViewModelController.swift in Sources */,
 				2FD8591521DA109200018E58 /* APIModel.swift in Sources */,
 				2F6F539E21D3AD8A00EEAE06 /* UserInformationModel.swift in Sources */,
 				2F6F53CE21D6309300EEAE06 /* WallInformationTableViewController.swift in Sources */,
 				2F6F539121CBC15900EEAE06 /* GroupsTableViewController.swift in Sources */,
+				2F764DBB21E532700089CF71 /* WallPostViewModel.swift in Sources */,
 				2F6F535C21CA5C8700EEAE06 /* AppDelegate.swift in Sources */,
 				2F6F538F21CBBD1600EEAE06 /* GroupsModel.swift in Sources */,
+				2F764DBD21E532A90089CF71 /* WallPostViewModelController.swift in Sources */,
 				2F764DB421DE48F30089CF71 /* PushButton.swift in Sources */,
 				2F6F53A021D3AEEC00EEAE06 /* UserInformationViewController.swift in Sources */,
 				2F6F53CA21D6303000EEAE06 /* WallInformationModel.swift in Sources */,
+				2F764DCB21E7A8B00089CF71 /* ImageService.swift in Sources */,
 				2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */,
 				2F6F53CC21D6305E00EEAE06 /* WallInformationTableViewCell.swift in Sources */,
 				2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */,
