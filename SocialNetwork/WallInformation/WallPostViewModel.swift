@@ -19,6 +19,7 @@ struct WallPostViewModel{
     let postImage: String?
     let postVideoImage: String?
     let attachmentType: String?
+    let videoId: String?
     
     init(wallItem: WallItems) {
         if let image = wallItem.copy_history?[0].attachments?[0].photo?.sizes?[3].url{
@@ -26,10 +27,12 @@ struct WallPostViewModel{
         } else{
             postImage = wallItem.attachments?[0].photo?.sizes?[3].url
         }
-        if let videoImage = wallItem.copy_history?[0].attachments?[0].video?.photo_320{
-            postVideoImage = videoImage
+        if let video = wallItem.copy_history?[0].attachments?[0].video{
+            postVideoImage = video.photo_320
+            videoId = "\(video.owner_id!)_\(video.id!)"
         } else{
             postVideoImage = wallItem.attachments?[0].video?.photo_320
+            videoId = "\(wallItem.attachments?[0].video?.owner_id!)_\(wallItem.attachments?[0].video?.id!)"
         }
         ownerDatePost = wallItem.date
         historyOwnerDatePost = wallItem.copy_history?[0].date

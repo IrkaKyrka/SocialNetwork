@@ -11,8 +11,8 @@ import Foundation
 
 class APIModel {
     
-    let userId = 21212138
-    let token = "d52cfc3e517fdb7b081b33c43e79323590c8476afae2e6e0e52135146e3a6cd3f133aea3ee11bd59a29d3"
+    let userId = 0
+    let token = ""
     
     
     func getData(method: String, params: [String:String], completion: @escaping (_ data: Data) -> Void) {
@@ -49,8 +49,9 @@ class APIModel {
         urlComponents.path = "/method/wall.post"
         urlComponents.query = "owner_id=\(userId)&message=\(message)&access_token=\(token)&v=5.92"
        
-        guard let url = urlComponents.url else {return}
         
+        guard let url = urlComponents.url else {return}
+        print(url)
         let request = URLRequest(url: url)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in

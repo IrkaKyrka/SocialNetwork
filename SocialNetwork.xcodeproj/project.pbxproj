@@ -32,6 +32,7 @@
 		2F764DC721E5E24F0089CF71 /* UIImageExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC621E5E24F0089CF71 /* UIImageExtention.swift */; };
 		2F764DC921E621C90089CF71 /* ImageLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DC821E621C90089CF71 /* ImageLoadOperation.swift */; };
 		2F764DCB21E7A8B00089CF71 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DCA21E7A8AF0089CF71 /* ImageService.swift */; };
+		2F764DCD21EA3A810089CF71 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F764DCC21EA3A810089CF71 /* VideoModel.swift */; };
 		2FD8590D21D9132200018E58 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590C21D9132200018E58 /* FriendsModel.swift */; };
 		2FD8590F21D913DC00018E58 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */; };
 		2FD8591121D9140E00018E58 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */; };
@@ -67,6 +68,7 @@
 		2F764DC621E5E24F0089CF71 /* UIImageExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtention.swift; sourceTree = "<group>"; };
 		2F764DC821E621C90089CF71 /* ImageLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadOperation.swift; sourceTree = "<group>"; };
 		2F764DCA21E7A8AF0089CF71 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		2F764DCC21EA3A810089CF71 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		2FD8590C21D9132200018E58 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		2FD8590E21D913DC00018E58 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		2FD8591021D9140E00018E58 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,8 +164,9 @@
 				2F764DBE21E538FA0089CF71 /* WallOwnerViewModel.swift */,
 				2F764DC421E54D670089CF71 /* WallGroupViewModel.swift */,
 				2F764DBC21E532A90089CF71 /* WallPostViewModelController.swift */,
-				2F764DC021E539340089CF71 /* WallOwnerViewModelController.swift */,
 				2F764DC221E54BF20089CF71 /* WallGroupViewModelController.swift */,
+				2F764DC021E539340089CF71 /* WallOwnerViewModelController.swift */,
+				2F764DCC21EA3A810089CF71 /* VideoModel.swift */,
 			);
 			path = WallInformation;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				2F6F539521D23D9D00EEAE06 /* GroupInformationModel.swift in Sources */,
 				2F764DBF21E538FA0089CF71 /* WallOwnerViewModel.swift in Sources */,
 				2F764DB621E3B58C0089CF71 /* VCLogger.swift in Sources */,
+				2F764DCD21EA3A810089CF71 /* VideoModel.swift in Sources */,
 				2F764DC921E621C90089CF71 /* ImageLoadOperation.swift in Sources */,
 				2F764DC721E5E24F0089CF71 /* UIImageExtention.swift in Sources */,
 				2F764DC121E539340089CF71 /* WallOwnerViewModelController.swift in Sources */,

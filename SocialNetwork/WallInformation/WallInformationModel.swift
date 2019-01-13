@@ -54,6 +54,7 @@ struct PostVideo: Decodable {
     let id: Int?
     let title: String?
     let photo_320: String?
+    let owner_id: Int?
 }
 
 struct SizeOfFoto: Decodable {
@@ -75,3 +76,4 @@ struct ProfileOfGroups: Decodable {
     let name: String?
     let photo_50: String?
 }
+

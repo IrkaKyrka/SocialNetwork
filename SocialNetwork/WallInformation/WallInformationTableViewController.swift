@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import WebKit
 
 enum Owner {
     case myself
@@ -26,6 +27,7 @@ class WallInformationTableViewController: UITableViewController {
     private var profilesOfGroup = [ProfileOfGroups]()
     private var nortification: UIAlertController!
     private let api = APIModel()
+    private var playVideoId = ""
     
     
     let wallPostViewModelController = WallPostViewModelController()
@@ -108,6 +110,9 @@ class WallInformationTableViewController: UITableViewController {
         cell.historyOwnerImage.image = nil
         cell.historyPostText.text = nil
         cell.historyOwnerName.text = nil
+        cell.historyPostImage.gestureRecognizers?.removeAll()
+     
+
         
         let post = self.wallPostViewModelController.viewModel(at: indexPath.row)
         
@@ -165,9 +170,9 @@ class WallInformationTableViewController: UITableViewController {
                         cell.historyPostImage.image = postImage
                     }
                 }
+                addGesture(image: cell.historyPostImage, videoId: post?.videoId)
             }
         }
-        addGesture(image: cell.historyPostImage, video: "")
 
         if let historyId = post?.historyOwnerId{
             if historyId > 0{
@@ -259,22 +264,9 @@ class WallInformationTableViewController: UITableViewController {
     @objc private func dismissNotification(){
         self.nortification.dismiss(animated: true, completion: nil)
     }
-    
-    private func getVideo(videoString: String, size: CGRect) -> AVPlayer{
-        //        let player = AVPlayer(url: URL(string: videoString)!)
-        //        let playerLayer = AVPlayerLayer(player: player)
-        //        playerLayer.frame = self.view.bounds
-        //        self.view.layer.addSublayer(playerLayer)
-        let playerItem = AVPlayerItem(url: URL(string: videoString)!)
-        let player = AVPlayer(playerItem: playerItem)
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = size
-        //      self.view.layer.addSublayer(playerLayer)
-        return player
-    }
-    
-    private func addGesture(image: UIImageView, video: String?){
 
+    private func addGesture(image: UIImageView, videoId: String?){
+        self.playVideoId = videoId!
         image.isUserInteractionEnabled = true
         let tapGestreRecognizer = UITapGestureRecognizer(target: self, action: #selector(playVideoTap))
         image.addGestureRecognizer(tapGestreRecognizer)
@@ -282,14 +274,49 @@ class WallInformationTableViewController: UITableViewController {
     }
 
     @objc func playVideoTap(sender: UITapGestureRecognizer){
-            let videoURL = "https://cs632401.vkuservideo.net/7/u214268/videos/ff8e69e759.240.mp4"
-                print(videoURL)
-                let video = AVPlayer(url: URL(fileURLWithPath: videoURL))
-                let videoPlayer = AVPlayerViewController()
-                videoPlayer.player = video
-                present(videoPlayer, animated: true,completion: {
-                    video.play()
-                })
+        
+// реализация при помощи UIWebView
+//        let myWebView:UIWebView = UIWebView(frame: CGRect(x:0, y:0, width: UIScreen.main.bounds.width, height:UIScreen.main.bounds.height))
+//        
+//        self.view.addSubview(myWebView)
+//        
+//        //1. Load web site into my web view
+//        let url = URL(string: "https://vk.com/video_ext.php?oid=-550419&id=456239217&hash=2e1ee575ecb5c9fa&__ref=vk.api&api_hash=15473141592948075937d5f61a6d_GIYTEMJSGEZTQ")
+//        let myURLRequest:URLRequest = URLRequest(url: url!)
+//        myWebView.loadRequest(myURLRequest)
+
+        let videoURL = "https://cs632300.vkuservideo.net/7/u214268/videos/115b80b6a6.720.mp4"
+        let video = AVPlayer(url: URL(fileURLWithPath: videoURL))
+        let videoPlayer = AVPlayerViewController()
+        videoPlayer.player = video
+        self.present(videoPlayer, animated: true,completion: {
+            video.play()
+        })
+
+// реализация запроса видео по id. VK не дает доспут по API к ссылке на видео.
+        /*api.getData(method: "video.get", params: [
+            "videos": playVideoId
+        ]) { (data) in
+            do{
+                print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
+//                let downloadedVideo = try JSONDecoder().decode(Video.self, from: data)
+//                let videoURL = downloadedVideo.response.items[0].files.mp4_720
+                DispatchQueue.main.async {
+                    let videoURL = "https://cs632300....Lg5KbOghSqfXXnWgZOQ"
+                    let video = AVPlayer(url: URL(fileURLWithPath: videoURL))
+                    let videoPlayer = AVPlayerViewController()
+                    videoPlayer.player = video
+                    self.present(videoPlayer, animated: true,completion: {
+                        video.play()
+                    })
+                }
+                
+            }catch let error {
+                
+                print(error)
+            }
+        }*/
+        
         
     }
     
